@@ -1,5 +1,6 @@
 using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using MonoBusiness.World;
 
@@ -9,11 +10,13 @@ public sealed class TerrainRenderer : IDisposable
 {
     static readonly Vector2 HalfWidth = new(TileMetrics.TileW / 2f, 0);
     readonly Texture2D _block,
+        _grass,
         _highlight;
 
-    public TerrainRenderer(GraphicsDevice device)
+    public TerrainRenderer(GraphicsDevice device, ContentManager content)
     {
-        _block = TileTextures.CreateBlockTexture(device);
+        _block = content.Load<Texture2D>("blocks");
+        _grass = content.Load<Texture2D>("grass");
         _highlight = TileTextures.CreateHighlightTexture(device);
         // TileTextures.SaveGeneratedTexture(_block, "blocks"); // Used to save the 2D texture as a file
     }
@@ -29,8 +32,9 @@ public sealed class TerrainRenderer : IDisposable
             {
                 var color =
                     z == h ? TerrainPalette.TopColor(h, time) : TerrainPalette.EarthColor(z);
+                
                 spriteBatch.Draw(
-                    _block,
+                    2 <= h && h <= 4 ? _grass : _block,
                     IsoProjection.TileToWorld(column, row, z) - HalfWidth,
                     color
                 );

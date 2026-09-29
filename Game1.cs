@@ -49,7 +49,7 @@ public class Game1 : Game
         _spriteBatch = new SpriteBatch(GraphicsDevice);
         Services.AddService(_spriteBatch);
 
-        _terrainRenderer = new TerrainRenderer(GraphicsDevice);
+        _terrainRenderer = new TerrainRenderer(GraphicsDevice, Content);
         _input = new InputState();
         TerrainGenerator.Generate(_worldGrid, 1996); // Swap the seed later
     }

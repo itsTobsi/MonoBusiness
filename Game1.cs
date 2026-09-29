@@ -27,6 +27,7 @@ public class Game1 : Game
             PreferredBackBufferWidth = 1280,
             PreferredBackBufferHeight = 720,
         };
+        Content.RootDirectory = "Content";
         IsMouseVisible = true;
         Window.AllowUserResizing = true;
     }

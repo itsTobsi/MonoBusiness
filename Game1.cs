@@ -14,11 +14,11 @@ public class Game1 : Game
     readonly Grid _worldGrid = new(WorldSettings.GridW, WorldSettings.GridH, WorldSettings.GridZ);
     readonly Camera2D _camera = new();
 
-    SpriteBatch _spriteBatch;
-    TerrainRenderer _terrainRenderer;
-    InputState _input;
-    float _time;
-    Point? _hover;
+    private SpriteBatch _spriteBatch;
+    private TerrainRenderer _terrainRenderer;
+    private InputState _input;
+    private float _time;
+    private Point? _hover;
     private bool _isResizing;
 
     public Game1()

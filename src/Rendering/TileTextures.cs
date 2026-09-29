@@ -1,7 +1,6 @@
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using static MonoBusiness.Rendering.TileMetrics;
 
 namespace MonoBusiness.Rendering;
 
@@ -69,5 +68,19 @@ public static class TileTextures
         var tex = new Texture2D(device, TileMetrics.TileW, TileMetrics.TileH);
         tex.SetData(data);
         return tex;
+    }
+
+    public static void SaveGeneratedTexture(Texture2D texture, string filename)
+    {
+        string folder = System.IO.Path.Combine(AppContext.BaseDirectory, "ExportedTextures");
+        System.IO.Directory.CreateDirectory(folder);
+        string path = System.IO.Path.Combine(
+            folder,
+            filename + $"_{DateTime.Now:ddMMyy_HHmmss}.png"
+        );
+        using (var stream = System.IO.File.Create(path))
+        {
+            texture.SaveAsPng(stream, texture.Width, texture.Height);
+        }
     }
 }

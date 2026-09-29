@@ -15,6 +15,7 @@ public sealed class TerrainRenderer : IDisposable
     {
         _block = TileTextures.CreateBlockTexture(device);
         _highlight = TileTextures.CreateHighlightTexture(device);
+        // TileTextures.SaveGeneratedTexture(_block, "blocks"); // Used to save the 2D texture as a file
     }
 
     // Back to front: increasing row, then column, then height.

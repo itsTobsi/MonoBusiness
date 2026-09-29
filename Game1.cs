@@ -19,6 +19,7 @@ public class Game1 : Game
     InputState _input;
     float _time;
     Point? _hover;
+    private bool _isResizing;
 
     public Game1()
     {
@@ -30,6 +31,7 @@ public class Game1 : Game
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
         Window.AllowUserResizing = true;
+        Window.ClientSizeChanged += OnClientSizeChanged;
     }
 
     protected override void Initialize()
@@ -122,6 +124,24 @@ public class Game1 : Game
 
         Window.Title =
             $"Tile ({p.X}, {p.Y}) - height {_worldGrid.Tiles[p.X, p.Y].height} - zoom {_camera.Zoom:0.00}x";
+    }
+
+    void OnClientSizeChanged(object sender, EventArgs ev)
+    {
+        if (_isResizing)
+        {
+            return;
+        }
+        if (Window.ClientBounds.Width <= 0 || Window.ClientBounds.Height <= 0)
+        {
+            return;
+        }
+
+        _isResizing = true;
+        _graphics.PreferredBackBufferWidth = Window.ClientBounds.Width;
+        _graphics.PreferredBackBufferHeight = Window.ClientBounds.Height;
+        _graphics.ApplyChanges();
+        _isResizing = false;
     }
 
     protected override void Draw(GameTime gameTime)

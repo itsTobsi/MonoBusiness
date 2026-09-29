@@ -1,0 +1,53 @@
+using System;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using MonoBusiness.World;
+
+namespace MonoBusiness.Rendering;
+
+public sealed class TerrainRenderer : IDisposable
+{
+    static readonly Vector2 HalfWidth = new(TileMetrics.TileW / 2f, 0);
+    readonly Texture2D _block,
+        _highlight;
+
+    public TerrainRenderer(GraphicsDevice device)
+    {
+        _block = TileTextures.CreateBlockTexture(device);
+        _highlight = TileTextures.CreateHighlightTexture(device);
+    }
+
+    // Back to front: increasing row, then column, then height.
+    public void Draw(SpriteBatch spriteBatch, Grid grid, float time, Point? hover)
+    {
+        for (int row = 0; row < grid.Height; row++)
+        for (int column = 0; column < grid.Width; column++)
+        {
+            int h = grid.Tiles[column, row].height;
+            for (int z = 0; z <= h; z++)
+            {
+                var color =
+                    z == h ? TerrainPalette.TopColor(h, time) : TerrainPalette.EarthColor(z);
+                spriteBatch.Draw(
+                    _block,
+                    IsoProjection.TileToWorld(column, row, z) - HalfWidth,
+                    color
+                );
+            }
+
+            // Draw the highlight here so tiles in front still overlap it.
+            if (hover is Point p && p.X == column && p.Y == row)
+                spriteBatch.Draw(
+                    _highlight,
+                    IsoProjection.TileToWorld(column, row, h) - HalfWidth,
+                    Color.Yellow
+                );
+        }
+    }
+
+    public void Dispose()
+    {
+        _block.Dispose();
+        _highlight.Dispose();
+    }
+}

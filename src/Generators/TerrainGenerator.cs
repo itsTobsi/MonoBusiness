@@ -20,7 +20,7 @@ public static class TerrainGenerator
                     + 0.5f * MathF.Sin((column + row) * 0.11f + ox)
                     + 0.25f * MathF.Cos((column - row) * 0.3f + oy);
                 int h = (int)MathF.Round((n + 1.2f) / 2.9f * grid.ZAxis);
-                grid.Tiles[column, row].height = Math.Clamp(h, 0, grid.ZAxis);
+                grid.Tiles[column, row].Height = Math.Clamp(h, 0, grid.ZAxis);
             }
         }
     }

@@ -123,7 +123,7 @@ public class Game1 : Game
             _worldGrid.Lower(p.X, p.Y);
 
         Window.Title =
-            $"Tile ({p.X}, {p.Y}) - height {_worldGrid.Tiles[p.X, p.Y].height} - zoom {_camera.Zoom:0.00}x";
+            $"Tile ({p.X}, {p.Y}) - height {_worldGrid.Tiles[p.X, p.Y].Height} - zoom {_camera.Zoom:0.00}x";
     }
 
     void OnClientSizeChanged(object sender, EventArgs ev)

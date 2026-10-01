@@ -18,13 +18,13 @@ public class Grid
         Width = width;
         Height = height;
         ZAxis = zAxis;
-        Tiles = new Tile[width, height];
+        Tiles = new Tile[width, height]; 
 
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
-                Tiles[x, y] = new Tile { Position = new Point(x, y) };
+                Tiles[x, y] = new Tile( new Point(x, y), 0 );
             }
         }
     }
@@ -33,10 +33,10 @@ public class Grid
         column >= 0 && row >= 0 && column < Width && row < Height;
 
     public void Raise(int column, int row) =>
-        Tiles[column, row].height = Math.Min(ZAxis, Tiles[column, row].height + 1);
+        Tiles[column, row].Height = Math.Min(ZAxis, Tiles[column, row].Height + 1);
 
     public void Lower(int column, int row) =>
-        Tiles[column, row].height = Math.Max(0, Tiles[column, row].height - 1);
+        Tiles[column, row].Height = Math.Max(0, Tiles[column, row].Height - 1);
 
     public void Draw(SpriteBatch spriteBatch)
     {

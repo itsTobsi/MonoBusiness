@@ -15,7 +15,7 @@ public static class TilePicker
         for (int height = 0; height <= grid.ZAxis; height++)
         {
             var tile = IsoProjection.WorldToTile(world, height);
-            if (!grid.InBounds(tile.X, tile.Y) || grid.Tiles[tile.X, tile.Y].height != height)
+            if (!grid.InBounds(tile.X, tile.Y) || grid.Tiles[tile.X, tile.Y].Height != height)
             {
                 continue;
             }

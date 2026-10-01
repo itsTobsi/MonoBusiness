@@ -27,7 +27,7 @@ public sealed class TerrainRenderer : IDisposable
         for (int row = 0; row < grid.Height; row++)
         for (int column = 0; column < grid.Width; column++)
         {
-            int h = grid.Tiles[column, row].height;
+            int h = grid.Tiles[column, row].Height;
             for (int z = 0; z <= h; z++)
             {
                 var color =
@@ -47,6 +47,8 @@ public sealed class TerrainRenderer : IDisposable
                     IsoProjection.TileToWorld(column, row, h) - HalfWidth,
                     Color.Yellow
                 );
+
+            
         }
     }
 

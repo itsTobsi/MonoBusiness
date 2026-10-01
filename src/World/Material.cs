@@ -6,7 +6,7 @@ public enum Material : byte
     Water,
     Sand,
     Grass,
-    Forrest,
+    Forest,
     Stone,
     Snow,
     Dirt,
